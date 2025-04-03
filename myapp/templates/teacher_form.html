@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% if student %}Edit{% else %}Create{% endif %} Student</title>
+    {% load static %}
+<link rel="stylesheet" href="{% static 'css/styles.css' %}">
+
+</head>
+<body>
+    <h1>{% if teacher %}Edit{% else %}Create{% endif %} Teacher</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label>Name:</label>
+        <input type="text" name="name" value="{{ teacher.name|default_if_none:'' }}" required>
+        <label>Age:</label>
+        <input type="number" name="age" value="{{ teacher.age|default_if_none:'' }}" required>
+        <label>Email:</label>
+        <input type="email" name="email" value="{{ teacher.email|default_if_none:'' }}" required>
+        <button type="submit">Save</button>
+    </form>
+    <a href="{% url 'home' %}">Cancel</a>
+</body>
+</html>

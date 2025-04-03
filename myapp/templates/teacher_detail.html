@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Teacher Detail</title>
+    {% load static %}
+<link rel="stylesheet" href="{% static 'css/styles.css' %}">
+
+</head>
+<body>
+    <h3>{{ teacher.name }}</h3>
+    <p>Age: {{ teacher.age }}</p>
+    <p>Email: {{ teacher.email }}</p>
+    <a href="{% url 'home' %}">Back to List</a>
+</body>
+</html>

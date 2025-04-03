@@ -1,0 +1,73 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+{% if user.is_authenticated %}
+    <h1>Welcome to the Student and Teacher Management System</h1>
+
+    <h2>Student List</h2>
+    <div class="container">
+        {% for student in students %}
+            <div class="card">
+                <h3>{{ student.name }}</h3>
+                <p>Age: {{ student.age }} years</p>
+                <p>Email: {{ student.email }}</p>
+                <div class="actions">
+                    <a href="{% url 'student_detail' student.id %}">View</a>
+                    <a href="{% url 'student_update' student.id %}">Edit</a>
+                    <a href="{% url 'student_delete' student.id %}">Delete</a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <a href="{% url 'student_create' %}" class="add-button">Add New Student</a>
+    <a href="{% url 'teacher_create' %}" class="add-button">Add New Teacher</a>
+
+    <h2>Teacher List</h2>
+    <div class="container">
+        {% for teacher in teachers %}
+            <div class="card">
+                <h3>{{ teacher.name }}</h3>
+                <p>Age: {{ teacher.age }} years</p>
+                <p>Email: {{ teacher.email }}</p>
+                <div class="actions">
+                    <a href="{% url 'teacher_detail' teacher.id %}">View</a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <a href="{% url 'logout' %}" class="add-button logout-button" style="
+        display: block;
+        width: 200px;
+        margin: 30px auto;
+        padding: 15px 30px;
+        background-color: #DC3545; /* Red color */
+        color: white;
+        text-align: center;
+        border-radius: 50px;
+        font-size: 18px;
+        font-weight: bold;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 10px rgba(220, 53, 69, 0.3);
+    " >Logout</a>
+
+
+{% else %}
+    <div class="auth-container">
+        <h1>Welcome to Our System</h1>
+        <p>Please <a href="{% url 'login' %}">Login</a> or <a href="{% url 'register' %}">Register</a> to continue.</p>
+    </div>
+{% endif %}
+
+</body>
+</html>
